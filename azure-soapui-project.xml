@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="47c2d3fa-34e2-44b8-ab89-3e56dc4b401c" activeEnvironment="Default" name="azure" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="9f1a3fcc-b757-4c3c-8b5f-e1d41d47e457" wsaVersion="NONE" name="azurePortSoap11" type="wsdl" bindingName="{http://mcc.org/azuremail/sender}azurePortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/services/v1/azure.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/services/v1/azure.wsdl"><con:part><con:url>http://localhost:8080/services/v1/azure.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://mcc.org/azuremail/sender" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://mcc.org/azuremail/sender" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mcc.org/azuremail/sender">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://mcc.org/azuremail/sender" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="mailSenderRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="config" type="tns:config"/>
+            <xs:element minOccurs="1" name="message" type="tns:message"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mailSenderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="response" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="config">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="clientId" type="xs:string"/>
+          <xs:element minOccurs="1" name="clientSecret" type="xs:string"/>
+          <xs:element minOccurs="1" name="tenantId" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="scopes" type="xs:string"/>
+          <xs:element minOccurs="1" name="callTimeout" type="xs:int"/>
+          <xs:element minOccurs="1" name="connectTimeout" type="xs:int"/>
+          <xs:element minOccurs="1" name="readTimeout" type="xs:int"/>
+          <xs:element minOccurs="1" name="writeTimeout" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="message">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="from" type="xs:string"/>
+          <xs:element minOccurs="1" name="to" type="xs:string"/>
+          <xs:element minOccurs="1" name="subject" type="xs:string"/>
+          <xs:element minOccurs="1" name="contentType" type="tns:bodyType"/>
+          <xs:element minOccurs="1" name="body" type="xs:string"/>
+          <xs:element name="attachments" type="tns:attachments"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="bodyType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TEXT"/>
+          <xs:enumeration value="HTML"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="attachments">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="attachment" type="tns:attachment"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="attachment">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="name" type="xs:string"/>
+          <xs:element minOccurs="1" name="contentType" type="xs:string"/>
+          <xs:element minOccurs="1" name="binary" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="mailSenderResponse">
+    <wsdl:part element="tns:mailSenderResponse" name="mailSenderResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="mailSenderRequest">
+    <wsdl:part element="tns:mailSenderRequest" name="mailSenderRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="azurePort">
+    <wsdl:operation name="mailSender">
+      <wsdl:input message="tns:mailSenderRequest" name="mailSenderRequest"></wsdl:input>
+      <wsdl:output message="tns:mailSenderResponse" name="mailSenderResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="azurePortSoap11" type="tns:azurePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="mailSender">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="mailSenderRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="mailSenderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="azurePortService">
+    <wsdl:port binding="tns:azurePortSoap11" name="azurePortSoap11">
+      <soap:address location="http://localhost:8080/services/v1"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/services/v1</con:endpoint></con:endpoints><con:operation id="cb86e49b-e32b-41bd-834e-cbae2989ae23" isOneWay="false" action="" name="mailSender" bindingOperationName="mailSender" type="Request-Response" outputName="mailSenderResponse" inputName="mailSenderRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d854ad05-0fb0-4022-9a31-42473260e917" name="Request 1" timeout="60000"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sen="http://mcc.org/azuremail/sender">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sen:mailSenderRequest>
+         <sen:config>
+            <sen:clientId>847d79d0-2106-43e8-b604-3cf51dbc2838</sen:clientId>
+            <sen:clientSecret>vsn8Q~lpHgTqqhmoqe4G39UxgZh.Ad8CYTY3dcHZ</sen:clientSecret>
+            <sen:tenantId>b8b6efb6-d71a-4c67-8933-c3ab478521d7</sen:tenantId>
+            <!--1 or more repetitions:-->
+            <sen:scopes>https://graph.microsoft.com/.default</sen:scopes>
+            <sen:callTimeout>60</sen:callTimeout>
+            <sen:connectTimeout>60</sen:connectTimeout>
+            <sen:readTimeout>60</sen:readTimeout>
+            <sen:writeTimeout>60</sen:writeTimeout>
+         </sen:config>
+         <sen:message>
+            <sen:from>vendors@example-customer.com</sen:from>
+            <sen:to>marcosolimpia@gmail.com</sen:to>
+            <sen:subject>teste Azure</sen:subject>
+            <sen:contentType>TEXT</sen:contentType>
+            <sen:body>mensagem</sen:body>
+            <sen:attachments>
+               <!--Zero or more repetitions:-->
+               <sen:attachment>
+                  <sen:name>testearquivo.txt</sen:name>
+                  <sen:contentType>text/plain</sen:contentType>
+                  <sen:binary>dGVzdGUgZGUgYXBsaWNhw6fDo28=</sen:binary>
+               </sen:attachment>
+            </sen:attachments>
+         </sen:message>
+      </sen:mailSenderRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://mcc.org/azuremail/sender/azurePort/mailSenderRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

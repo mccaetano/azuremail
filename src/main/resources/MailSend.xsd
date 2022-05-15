@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://mcc.org/azuremail/sender" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://mcc.org/azuremail/sender" elementFormDefault="qualified">
+    <xs:element name="mailSenderRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="config" type="tns:config" minOccurs="1"></xs:element>
+                <xs:element name="message" type="tns:message" minOccurs="1"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="mailSenderResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="response"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="config">
+        <xs:sequence>
+            <xs:element type="xs:string" name="clientId" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="clientSecret" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="tenantId" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="scopes" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element type="xs:int" name="callTimeout" minOccurs="1"></xs:element>
+            <xs:element type="xs:int" name="connectTimeout" minOccurs="1"></xs:element>
+            <xs:element type="xs:int" name="readTimeout" minOccurs="1"></xs:element>
+            <xs:element type="xs:int" name="writeTimeout" minOccurs="1"></xs:element>
+
+
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="message">
+        <xs:sequence>
+            <xs:element type="xs:string" name="from" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="to" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="subject" minOccurs="1"></xs:element>
+            <xs:element type="tns:bodyType" name="contentType" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="body" minOccurs="1"></xs:element>
+            <xs:element type="tns:attachments" name="attachments"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="bodyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TEXT"/>
+            <xs:enumeration value="HTML"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="attachments">
+        <xs:sequence>
+            <xs:element type="tns:attachment" name="attachment" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="attachment">
+        <xs:sequence>
+            <xs:element type="xs:string" name="name" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="contentType" minOccurs="1"></xs:element>
+            <xs:element type="xs:string" name="binary" minOccurs="1"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

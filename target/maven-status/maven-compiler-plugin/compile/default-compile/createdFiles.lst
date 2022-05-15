@@ -1,0 +1,16 @@
+org\mcc\azuremail\sender\BodyType.class
+org\mcc\azuremail\model\TimeoutProperties.class
+org\mcc\azuremail\AzuremailApplication.class
+org\mcc\azuremail\sender\MailSenderResponse.class
+org\mcc\azuremail\model\ApplicationProperties.class
+org\mcc\azuremail\sender\Config.class
+org\mcc\azuremail\sender\Attachment.class
+org\mcc\azuremail\sender\Attachments.class
+org\mcc\azuremail\service\SendMailService.class
+org\mcc\azuremail\controller\SendMailEndpoint.class
+META-INF\spring-configuration-metadata.json
+org\mcc\azuremail\configuration\WebServiceConfig.class
+org\mcc\azuremail\sender\ObjectFactory.class
+org\mcc\azuremail\sender\Message.class
+org\mcc\azuremail\sender\package-info.class
+org\mcc\azuremail\sender\MailSenderRequest.class
