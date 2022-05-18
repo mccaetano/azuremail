@@ -164,7 +164,7 @@ public class Config {
      */
     public List<String> getScopes() {
         if (scopes == null) {
-            scopes = new ArrayList<String>();
+            scopes = new ArrayList<>();
         }
         return this.scopes;
     }

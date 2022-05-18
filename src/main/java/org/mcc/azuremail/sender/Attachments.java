@@ -66,7 +66,7 @@ public class Attachments {
      */
     public List<Attachment> getAttachment() {
         if (attachment == null) {
-            attachment = new ArrayList<Attachment>();
+            attachment = new ArrayList<>();
         }
         return this.attachment;
     }

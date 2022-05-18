@@ -17,7 +17,7 @@ public class SendMailEndpoint {
     @Autowired
     private SendMailService service;
 
-    private final String TRAGET_NAMESPACE = "http://mcc.org/azuremail/sender";
+    private static final String TRAGET_NAMESPACE = "http://mcc.org/azuremail/sender";
 
 
     @PayloadRoot(namespace = TRAGET_NAMESPACE, localPart = "mailSenderRequest")

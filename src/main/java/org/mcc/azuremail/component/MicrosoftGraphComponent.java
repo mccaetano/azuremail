@@ -1,23 +1,32 @@
 package org.mcc.azuremail.component;
 
-import com.azure.identity.ClientSecretCredential;
-import com.azure.identity.ClientSecretCredentialBuilder;
-import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
-import com.microsoft.graph.httpcore.HttpClients;
-import com.microsoft.graph.models.*;
-import com.microsoft.graph.requests.AttachmentCollectionPage;
-import com.microsoft.graph.requests.AttachmentCollectionResponse;
-import com.microsoft.graph.requests.GraphServiceClient;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import org.mcc.azuremail.sender.MailSenderRequest;
-import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
+
+import org.mcc.azuremail.sender.MailSenderRequest;
+import org.springframework.stereotype.Component;
+
+import com.azure.identity.ClientSecretCredential;
+import com.azure.identity.ClientSecretCredentialBuilder;
+import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
+import com.microsoft.graph.httpcore.HttpClients;
+import com.microsoft.graph.models.Attachment;
+import com.microsoft.graph.models.BodyType;
+import com.microsoft.graph.models.EmailAddress;
+import com.microsoft.graph.models.FileAttachment;
+import com.microsoft.graph.models.ItemBody;
+import com.microsoft.graph.models.Message;
+import com.microsoft.graph.models.Recipient;
+import com.microsoft.graph.models.UserSendMailParameterSet;
+import com.microsoft.graph.requests.AttachmentCollectionPage;
+import com.microsoft.graph.requests.AttachmentCollectionResponse;
+import com.microsoft.graph.requests.GraphServiceClient;
+
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 @Slf4j
 @Component
@@ -53,6 +62,7 @@ public class MicrosoftGraphComponent {
                 .collect(Collectors.toCollection(LinkedList::new));
         AttachmentCollectionResponse attachmentCollectionResponse = new AttachmentCollectionResponse();
         attachmentCollectionResponse.value = attachments;
+
         AttachmentCollectionPage attachmentCollectionPage = new AttachmentCollectionPage(attachmentCollectionResponse, null);
         message.attachments = attachmentCollectionPage;
 
@@ -85,7 +95,6 @@ public class MicrosoftGraphComponent {
                 .buildClient();
 
 
-        /* TODO - utilizando conta de serviço */
         graphClient.users(mailModel.getMessage().getFrom())
                 .sendMail(UserSendMailParameterSet
                         .newBuilder()

@@ -17,14 +17,14 @@ import org.springframework.xml.xsd.XsdSchema;
 public class WebServiceConfig extends WsConfigurerAdapter {
 
 
-    private final String TRAGET_NAMESPACE = "http://mcc.org/azuremail/sender";
+    private static final String TRAGET_NAMESPACE = "http://mcc.org/azuremail/sender";
 
     @Bean
     public  ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean<MessageDispatcherServlet>(servlet, "/services/v1/*");
+        return new ServletRegistrationBean<>(servlet, "/services/v1/*");
     }
 
     @Bean(name = "azure")
