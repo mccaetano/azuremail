@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -41,8 +42,9 @@ import javax.xml.bind.annotation.XmlType;
     "message"
 })
 @XmlRootElement(name = "mailSenderRequest")
-public class MailSenderRequest {
+public class MailSenderRequest implements Serializable {
 
+    private static final long serialVersionUID = 3697272529643424673L;
     @XmlElement(required = true)
     protected Config config;
     @XmlElement(required = true)

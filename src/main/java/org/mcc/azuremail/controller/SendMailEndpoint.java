@@ -1,6 +1,5 @@
 package org.mcc.azuremail.controller;
 
-import org.mcc.azuremail.model.ApplicationProperties;
 import org.mcc.azuremail.sender.MailSenderRequest;
 import org.mcc.azuremail.sender.MailSenderResponse;
 import org.mcc.azuremail.service.SendMailService;
@@ -14,8 +13,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class SendMailEndpoint {
 
-    @Autowired
-    private ApplicationProperties properties;
 
     @Autowired
     private SendMailService service;
